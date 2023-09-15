@@ -10,7 +10,7 @@
         $('#table-publication').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('publications.index') }}",
+            ajax: "{{ route('publications.create') }}",
             columns: [{
                     data: 'id',
                     name: 'id'
@@ -92,7 +92,7 @@
                     let tablePublication = $('#table-publication').DataTable();
                     tablePublication.ajax.reload();
                     toastr.clear,
-                    toastr.success('Ciudad actualizada existosamente.')
+                    toastr.success('Publicación actualizada existosamente.')
                 },
                 error: function(xhr) {
                     if (xhr.status === 422) {
@@ -118,7 +118,6 @@
                 $('#titleModal').html('EDITAR PUBLICACIÓN ')
                 $('#btnUpdate').show();
                 $('#btnSave').hide();
-                
             }
         })
     };

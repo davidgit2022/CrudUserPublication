@@ -9,7 +9,17 @@ use Illuminate\Support\Facades\Auth;
 class PublicationController extends Controller
 {
 
+    public $pagination = 5;
     public function index()
+    {
+        $publications = Publication::latest()->paginate($this->pagination);
+        return view('publications.index', compact('publications'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
         if (request()->ajax()) {
             return datatables()->of(Publication::select('id', 'title', 'content', 'author_id'))
@@ -18,15 +28,7 @@ class PublicationController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('publications.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('publications.create');
     }
 
     /**
@@ -60,9 +62,11 @@ class PublicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Publication $publication)
+    public function show(Publication $publication, $id)
     {
-        //
+        $publication = Publication::find($id);
+
+        return view('publications.show', compact('publication'));
     }
 
     /**
@@ -92,11 +96,6 @@ class PublicationController extends Controller
 
         $publication = Publication::find($request->id);
 
-        /* $publication->title = $request->title;
-        $publication->content = $request->content;
-        $publication->author_id = $user->id;
-
-        $publication->update(); */
         $publication->update([
             'title' => $request->title,
             'content' => $request->content,

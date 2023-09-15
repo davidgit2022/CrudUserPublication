@@ -17,13 +17,17 @@ Route::controller(PublicationController::class)->group(function(){
     
     Route::get('/publications', 'index')->name('publications.index');
 
-    Route::post('/publications', 'store')->name('publications.store');
-
-    Route::get('/publications/{id}', 'show')->name('publications.show');
+    Route::get('/publications-create', 'create')->name('publications.create');
 
     Route::get('/publications/edit/{id}', 'edit')->name('publications.edit');
 
     Route::post('/publications/update/{id}', 'update')->name('publications.update');
+
+    Route::post('/publications', 'store')->name('publications.store');
+
+    Route::get('/publications/{id}', 'show')->name('publications.show');
+
+    
 
     Route::delete('/publications/delete/{id}', 'destroy')->name('publications.delete');
 });

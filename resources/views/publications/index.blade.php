@@ -1,34 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-2">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="pull-left">
-                <h2><b>Publicaciones</b></h2>
-            </div>
-            <div class="float-sm-end mb-2 ">
-                <a href="javascript:void(0)" class="btn btn-success">Nuevo</a>
+
+    <div class="container mt-5">
+        <h2>Listado de Publicaciones</h1>
+        @forelse ($publications as $publication)
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ route('publications.show', ['id' => $publication->id]) }}">
+
+                        {{ $publication->title}}
+                    </a>
+                </h5>
+                <p class="card-text">
+                    <strong>Autor: </strong><span>{{ $publication->user->name }}</span>
+                </p>
             </div>
         </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table" id="table-publication">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Titúlo</th>
-                        <th>Contenido</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-            </table>
+        @empty
+        <p>No hay publicaciones</p>
+        @endforelse
+    
+        <div class="d-flex justify-content-center">
+            {{ $publications->links()}}
         </div>
     </div>
-    @include('publications.modal')
-</div>
 @endsection
 @push('javascript')
-    @include('ajax.ajaxPublication')
+    
 @endpush

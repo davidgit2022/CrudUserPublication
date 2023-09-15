@@ -25,7 +25,7 @@ class User extends Authenticatable
     ];
 
     public function publications(){
-        return $this->hasMany(Publication::class);
+        return $this->hasMany(Publication::class, 'author_id');
     }
 
     /**
