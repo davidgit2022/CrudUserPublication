@@ -21,9 +21,9 @@
         <p>No hay publicaciones</p>
         @endforelse
     
-        <div class="d-flex justify-content-center">
-            {{ $publications->links()}}
-        </div>
+        {{ $publications->links('pagination::bootstrap-5') }}
+
+        
     </div>
 @endsection
 @push('javascript')
