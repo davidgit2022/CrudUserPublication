@@ -9,7 +9,6 @@
             <div class="card-body">
                 <h5 class="card-title">
                     <a href="{{ route('publications.show', ['id' => $publication->id]) }}">
-
                         {{ $publication->title}}
                     </a>
                 </h5>

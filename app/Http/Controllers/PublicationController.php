@@ -64,9 +64,11 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication, $id)
     {
+
         $publication = Publication::find($id);
 
         return view('publications.show', compact('publication'));
+
     }
 
     /**
